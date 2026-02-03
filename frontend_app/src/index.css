@@ -1,13 +1,72 @@
+:root{
+  --bg: #f9fafb;
+  --surface: #ffffff;
+  --text: #111827;
+
+  --primary: #3b82f6;
+  --success: #06b6d4;
+
+  /* Retro styling tokens */
+  --pixel-border: 2px;
+  --pixel-radius: 10px;
+  --shadow: 0 14px 34px rgba(17, 24, 39, 0.10);
+  --shadow-sm: 0 8px 18px rgba(17, 24, 39, 0.08);
+
+  --font-ui: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-retro: "Press Start 2P", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+*{ box-sizing: border-box; }
+
+html, body { height: 100%; }
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-ui);
+  color: var(--text);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.10), #f9fafb 50%, #f9fafb);
+  overflow-x: hidden;
+}
+
+/* Scanline/grain overlay (subtle). Disabled for reduced transparency users. */
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.08;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(17, 24, 39, 0.05) 0px,
+      rgba(17, 24, 39, 0.05) 1px,
+      rgba(17, 24, 39, 0.00) 3px,
+      rgba(17, 24, 39, 0.00) 6px
+    );
+  mix-blend-mode: multiply;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  body::before { display: none; }
+}
+
+/* Accessible focus */
+:focus-visible{
+  outline: 3px solid var(--success);
+  outline-offset: 3px;
+}
+
+/* Better default selection */
+::selection{
+  background: rgba(6, 182, 212, 0.25);
+}
+
+a{
+  color: inherit;
+  text-decoration-color: rgba(59, 130, 246, 0.55);
+  text-underline-offset: 3px;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
